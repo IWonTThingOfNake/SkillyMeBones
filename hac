@@ -118,9 +118,35 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
+local function billboard(char,txt)
+	local billboard = Instance.new("BillboardGui",char.HumanoidRootPart)
+	billboard.AlwaysOnTop = true
+	billboard.Size = UDim2.new(0,200,0,50)
+	billboard.Adornee = char
+	local textlabel = Instance.new("TextLabel",billboard)
+	textlabel.Size = UDim2.new(1,0,1,0)
+	textlabel.Text = txt
+	billboard.Name = "BB"
+	textlabel.TextColor = Color3.new(1,1,1)
+	textlabel.TextScaled = true
+	textlabel.TextStrokeTransparency = 0
+	return billboard
+end
+
 local flags = {}
 
 local Universal = Window:CreateTab("Universal", "rewind")
+
+local uplr = Universal:CreateColorPicker({
+    Name = "Player ESP Color",
+    Color = Color3.fromRGB(255,0,0),
+    Flag = "ColorPicker1", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
 Universal:CreateToggle({
    Name = "Player ESP",
    CurrentValue = false,
@@ -133,19 +159,189 @@ Universal:CreateToggle({
             	if v.Character and not v.Character:FindFirstChild("esp") then
              	  local h = Instance.new("Highlight",v.Character)
               	  h.Name = "esp"
-              	  h.FillColor = Color3.new(1,0,0)
+              	  h.FillColor = uplr.Color
+				  billboard(v.HumanoidRootPart,v.DisplayName.."(@"..plr.Name..") | ..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
             	end
         	end
 			task.wait(1)
     	end
 	else
 		flags.esp = nil
+		for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Character and v.Character:FindFirstChild("esp") then
+        	  v.Character.esp:Destroy()
+			  v.Character.HumanoidRootPart.BB:Destroy()
+            end
+        end
 	end
 end,
 })
 
 
+local forsaken = Window:CreateTab("Forsaken", "rewind")
 
+local splr = forsaken:CreateColorPicker({
+    Name = "Survivor ESP Color",
+    Color = Color3.fromRGB(0,255,0),
+    Flag = "ColorPicker2", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+forsaken:CreateToggle({
+   Name = "Survivor ESP",
+   CurrentValue = false,
+   Flag = "Toggle2", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.esp3 = true
+		while flags.esp3 == true do
+        	for i,v in pairs(game.Players:GetPlayers()) do
+            	if v.Character and not v.Character:FindFirstChild("esp") then
+             	  local h = Instance.new("Highlight",v.Character)
+              	  h.Name = "esp"
+              	  h.FillColor = splr.Color
+				  billboard(v.HumanoidRootPart,v.DisplayName.."(@"..plr.Name..") | ..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.esp3 = nil
+		for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Character and v.Character:FindFirstChild("esp") then
+        	  v.Character.esp:Destroy()
+			  v.Character.HumanoidRootPart.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+local kplr = forsaken:CreateColorPicker({
+    Name = "Killer ESP Color",
+    Color = Color3.fromRGB(255,0,0),
+    Flag = "ColorPicker3", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+forsaken:CreateToggle({
+   Name = "Killer ESP",
+   CurrentValue = false,
+   Flag = "Toggle3", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.esp2 = true
+		while flags.esp2 == true do
+        	for i,v in pairs(game.Players:GetPlayers()) do
+            	if v.Character and not v.Character:FindFirstChild("esp") then
+             	  local h = Instance.new("Highlight",v.Character)
+              	  h.Name = "esp"
+              	  h.FillColor = kplr.Color
+				  billboard(v.HumanoidRootPart,v.DisplayName.."(@"..plr.Name..") | ..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.esp2 = nil
+		for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Character and v.Character:FindFirstChild("esp") then
+        	  v.Character.esp:Destroy()
+			  v.Character.HumanoidRootPart.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+local te = forsaken:CreateColorPicker({
+    Name = "Item ESP Color",
+    Color = Color3.fromRGB(255,100,0),
+    Flag = "ColorPicker4", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+forsaken:CreateToggle({
+   Name = "Item ESP",
+   CurrentValue = false,
+   Flag = "Toggle4", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.esp4 = true
+		while flags.esp4 == true do
+        	for i,v in pairs(workspace.Map.Ingame:GetDescendants()) do
+            	if v:IsA("Tool") and not v:FindFirstChild("esp") then
+             	  local h = Instance.new("Highlight",v)
+              	  h.Name = "esp"
+              	  h.FillColor = te.Color
+				  billboard(v,v.Name)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.esp4 = nil
+		for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Character and v.Character:FindFirstChild("esp") then
+        	  v.Character.esp:Destroy()
+			  v.Character.HumanoidRootPart.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+local ge = forsaken:CreateColorPicker({
+    Name = "Generator ESP Color",
+    Color = Color3.fromRGB(0,0,255),
+    Flag = "ColorPicker5", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+forsaken:CreateToggle({
+   Name = "Generator ESP",
+   CurrentValue = false,
+   Flag = "Toggle5", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.esp5 = true
+		while flags.esp5 == true do
+        	for i,v in pairs(workspace.Map.Ingame:GetDescendants()) do
+            	if v.Name == "Generator" and v:IsA("Model") and not v:FindFirstChild("esp") then
+             	  local h = Instance.new("Highlight",v)
+              	  h.Name = "esp"
+              	  h.FillColor = ge.Color
+				  local b = billboard(v.Main,v.Name.." | 0%")
+				  v.Progress.Changed:Connect(function(newV)
+					b.TextLabel.Text = v.Name.." | ".. 100/newV .."%"
+				  end)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.esp5 = nil
+		for i,v in pairs(workspace.Map.Ingame:GetDescendants()) do
+            if v.Name == "Generator" and v:IsA("Model") and v:FindFirstChild("esp") then
+        	  v.esp:Destroy()
+			  v.BB:Destroy()
+            end
+        end
+	end
+end,
+})
 
 local misc = Window:CreateTab("Misc", "rewind")
 misc:CreateButton({
