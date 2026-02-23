@@ -2,82 +2,11 @@
 -- pkqwjdpoqjdpojqpodjqodjqwdjpoqjpoqjdpqoj
 -- qjhdqpjdpoqjdpoqjdopqjpodqjpodqjpodqjpodjqw
 
+print("V0 - ESP testing")
+
 local TweenService = game:GetService("TweenService")
 
 local plr = game.Players.LocalPlayer
-
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "NotificationGui"
-screenGui.ResetOnSpawn = false
-screenGui.Parent = plr:WaitForChild("PlayerGui")
-
-local container = Instance.new("Frame")
-container.Name = "Container"
-container.AnchorPoint = Vector2.new(0.5, 0)
-container.Position = UDim2.new(0.5, 0, 0, 20)
-container.Size = UDim2.new(0, 400, 0, 300)
-container.BackgroundTransparency = 1
-container.Parent = screenGui
-
-local layout = Instance.new("UIListLayout")
-layout.Padding = UDim.new(0, 8)
-layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-layout.VerticalAlignment = Enum.VerticalAlignment.Top
-layout.SortOrder = Enum.SortOrder.LayoutOrder
-layout.Parent = container
-
-local function Notify(message, duration)
-	duration = duration or 3
-
-	local notification = Instance.new("Frame")
-	notification.Size = UDim2.new(1, 0, 0, 50)
-	notification.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-	notification.BackgroundTransparency = 1
-	notification.BorderSizePixel = 0
-	notification.Parent = container
-
-	local corner = Instance.new("UICorner")
-	corner.CornerRadius = UDim.new(0, 10)
-	corner.Parent = notification
-
-	local text = Instance.new("TextLabel")
-	text.Size = UDim2.new(1, -20, 1, 0)
-	text.Position = UDim2.new(0, 10, 0, 0)
-	text.BackgroundTransparency = 1
-	text.TextColor3 = Color3.new(1, 1, 1)
-	text.TextTransparency = 1
-	text.TextScaled = true
-	text.Font = Enum.Font.GothamBold
-	text.Text = message
-	text.Parent = notification
-	
-	local fadeIn = TweenService:Create(notification, TweenInfo.new(0.3), {
-		BackgroundTransparency = 0
-	})
-	
-	local textFadeIn = TweenService:Create(text, TweenInfo.new(0.3), {
-		TextTransparency = 0
-	})
-	
-	fadeIn:Play()
-	textFadeIn:Play()
-
-	task.wait(duration)
-
-	local fadeOut = TweenService:Create(notification, TweenInfo.new(0.3), {
-		BackgroundTransparency = 1
-	})
-	
-	local textFadeOut = TweenService:Create(text, TweenInfo.new(0.3), {
-		TextTransparency = 1
-	})
-	
-	fadeOut:Play()
-	textFadeOut:Play()
-	
-	fadeOut.Completed:Wait()
-	notification:Destroy()
-end
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
@@ -119,7 +48,7 @@ local Window = Rayfield:CreateWindow({
 })
 
 local function billboard(char,txt)
-	local billboard = Instance.new("BillboardGui",char.HumanoidRootPart)
+	local billboard = Instance.new("BillboardGui",char)
 	billboard.AlwaysOnTop = true
 	billboard.Size = UDim2.new(0,200,0,50)
 	billboard.Adornee = char
@@ -325,7 +254,7 @@ forsaken:CreateToggle({
               	  h.FillColor = ge.Color
 				  local b = billboard(v.Main,v.Name.." | 0%")
 				  v.Progress.Changed:Connect(function(newV)
-					b.TextLabel.Text = v.Name.." | ".. 100/newV .."%"
+					b.TextLabel.Text = v.Name.." | ".. (newV/4)*100 .."%"
 				  end)
             	end
         	end
