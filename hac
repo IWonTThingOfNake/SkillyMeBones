@@ -1,3 +1,6 @@
+-- lpldqpldpqwdlpqp
+-- pkqwjdpoqjdpojqpodjqodjqwdjpoqjpoqjdpqoj
+
 local TweenService = game:GetService("TweenService")
 
 local plr = game.Players.LocalPlayer
@@ -5,7 +8,7 @@ local plr = game.Players.LocalPlayer
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "NotificationGui"
 screenGui.ResetOnSpawn = false
-screenGui.Parent = player:WaitForChild("PlayerGui")
+screenGui.Parent = plr:WaitForChild("PlayerGui")
 
 local container = Instance.new("Frame")
 container.Name = "Container"
@@ -88,7 +91,7 @@ local Window = Rayfield:CreateWindow({
    ToggleUIKeybind = "K", -- The keybind to toggle the UI visibility (string like "K" or Enum.KeyCode)
 
    DisableRayfieldPrompts = false,
-   DisableBuildWarnings = false -- Prevents Rayfield from emitting warnings when the script has a version mismatch with the interface.
+   DisableBuildWarnings = false, -- Prevents Rayfield from emitting warnings when the script has a version mismatch with the interface.
 
    ConfigurationSaving = {
       Enabled = true,
@@ -114,21 +117,28 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
+local flags = {}
+
 local Universal = Window:CreateTab("Universal", "rewind")
 Universal:CreateToggle({
    Name = "Player ESP",
    CurrentValue = false,
    Flag = "Toggle1", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(Value)
-    while task.wait(1) do
-        for i,plr in pairs(game.Players:GetPlayers()) do
-            if not plr.Character:FindFirstChild("esp") then
-                local h = Instance.new("Highlight",plr.Character)
-                h.Name = "esp"
-                h.FillColor = Color3.new(1,0,0)
-            end
-        end
-    end
+    if Value == true then
+		flags.esp = true
+		while flag.esp == true do
+        	for i,plr in pairs(game.Players:GetPlayers()) do
+            	if not plr.Character:FindFirstChild("esp") then
+             	   local h = Instance.new("Highlight",plr.Character)
+              	  h.Name = "esp"
+              	  h.FillColor = Color3.new(1,0,0)
+           	 end
+        	end
+    	end
+	else
+		flags.esp = nil
+	end
 end,
 })
 
