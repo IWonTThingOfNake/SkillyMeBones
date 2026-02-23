@@ -59,6 +59,7 @@ local function billboard(char,txt)
 	textlabel.TextColor3 = Color3.new(1,1,1)
 	textlabel.TextScaled = true
 	textlabel.TextStrokeTransparency = 0
+	textlabel.BackgroundTransparency = 1
 	return billboard
 end
 
@@ -89,7 +90,7 @@ Universal:CreateToggle({
              	  local h = Instance.new("Highlight",v.Character)
               	  h.Name = "esp"
               	  h.FillColor = uplr.Color
-				  billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..plr.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
             	end
         	end
 			task.wait(1)
@@ -127,22 +128,26 @@ forsaken:CreateToggle({
     if Value == true then
 		flags.esp3 = true
 		while flags.esp3 == true do
-        	for i,v in pairs(game.Players:GetPlayers()) do
+        	for i,x in pairs(workspace.Players.Survivors:GetChildren()) do
+				local v = game.Players:GetPlayerFromCharacter(x)
             	if v.Character and not v.Character:FindFirstChild("esp") then
              	  local h = Instance.new("Highlight",v.Character)
               	  h.Name = "esp"
               	  h.FillColor = splr.Color
-				  billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..plr.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  local b = billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  v.Character.Humanoid.HealthChanged:Connect(function(hp)
+					b.TextLabel.Text = v.DisplayName.."(@"..v.Name..") | "..hp.."/"..v.Character.Humanoid.MaxHealth
+				  end)
             	end
         	end
 			task.wait(1)
     	end
 	else
 		flags.esp3 = nil
-		for i,v in pairs(game.Players:GetPlayers()) do
-            if v.Character and v.Character:FindFirstChild("esp") then
-        	  v.Character.esp:Destroy()
-			  v.Character.HumanoidRootPart.BB:Destroy()
+		for i,v in pairs(workspace.Players.Survivors:GetChildren()) do
+            if v and v:FindFirstChild("esp") then
+        	  v.esp:Destroy()
+			  v.HumanoidRootPart.BB:Destroy()
             end
         end
 	end
@@ -167,22 +172,26 @@ forsaken:CreateToggle({
     if Value == true then
 		flags.esp2 = true
 		while flags.esp2 == true do
-        	for i,v in pairs(game.Players:GetPlayers()) do
+        	for i,x in pairs(workspace.Players.Killers:GetChildren()) do
+				local v = game.Players:GetPlayerFromCharacter(x)
             	if v.Character and not v.Character:FindFirstChild("esp") then
              	  local h = Instance.new("Highlight",v.Character)
               	  h.Name = "esp"
               	  h.FillColor = kplr.Color
-				  billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..plr.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  local b = billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  v.Character.Humanoid.HealthChanged:Connect(function(hp)
+					b.TextLabel.Text = v.DisplayName.."(@"..v.Name..") | "..hp.."/"..v.Character.Humanoid.MaxHealth
+				  end)
             	end
         	end
 			task.wait(1)
     	end
 	else
 		flags.esp2 = nil
-		for i,v in pairs(game.Players:GetPlayers()) do
-            if v.Character and v.Character:FindFirstChild("esp") then
-        	  v.Character.esp:Destroy()
-			  v.Character.HumanoidRootPart.BB:Destroy()
+		for i,v in pairs(workspace.Players.Killers:GetChildren()) do
+            if v and v:FindFirstChild("esp") then
+        	  v.esp:Destroy()
+			  v.HumanoidRootPart.BB:Destroy()
             end
         end
 	end
@@ -249,13 +258,15 @@ forsaken:CreateToggle({
 		while flags.esp5 == true do
         	for i,v in pairs(workspace.Map.Ingame:GetDescendants()) do
             	if v.Name == "Generator" and v:IsA("Model") and not v:FindFirstChild("esp") then
-             	  local h = Instance.new("Highlight",v)
-              	  h.Name = "esp"
-              	  h.FillColor = ge.Color
-				  local b = billboard(v.Main,v.Name.." | 0%")
-				  v.Progress.Changed:Connect(function(newV)
-					b.TextLabel.Text = v.Name.." | ".. (newV/4)*100 .."%"
-				  end)
+             	 task.spawn(function()
+					 local h = Instance.new("Highlight",v)
+              	  	h.Name = "esp"
+              	  	h.FillColor = ge.Color
+				    local b = billboard(v.Main,v.Name.." | 0%")
+				  	v.Progress.Changed:Connect(function(newV)
+						b.TextLabel.Text = v.Name.." | ".. (newV/4)*100 .."%"
+				    end)
+				 end)
             	end
         	end
 			task.wait(1)
