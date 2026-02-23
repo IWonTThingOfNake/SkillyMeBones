@@ -3,6 +3,7 @@
 -- qjhdqpjdpoqjdpoqjdopqjpodqjpodqjpodqjpodjqw
 
 print("V0 - ESP testing")
+print("V0.1 - ESP Addons/Fixes")
 
 local TweenService = game:GetService("TweenService")
 
@@ -90,7 +91,7 @@ Universal:CreateToggle({
              	  local h = Instance.new("Highlight",v.Character)
               	  h.Name = "esp"
               	  h.FillColor = uplr.Color
-				  billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..math.round(v.Character.Humanoid.Health).."/"..math.round(v.Character.Humanoid.MaxHealth))
             	end
         	end
 			task.wait(1)
@@ -136,7 +137,7 @@ forsaken:CreateToggle({
               	  h.FillColor = splr.Color
 				  local b = billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
 				  v.Character.Humanoid.HealthChanged:Connect(function(hp)
-					b.TextLabel.Text = v.DisplayName.."(@"..v.Name..") | "..hp.."/"..v.Character.Humanoid.MaxHealth
+					b.TextLabel.Text = v.DisplayName.."(@"..v.Name..") | "..math.round(hp).."/"..math.round(v.Character.Humanoid.MaxHealth)
 				  end)
             	end
         	end
