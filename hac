@@ -127,7 +127,7 @@ local function billboard(char,txt)
 	textlabel.Size = UDim2.new(1,0,1,0)
 	textlabel.Text = txt
 	billboard.Name = "BB"
-	textlabel.TextColor = Color3.new(1,1,1)
+	textlabel.TextColor3 = Color3.new(1,1,1)
 	textlabel.TextScaled = true
 	textlabel.TextStrokeTransparency = 0
 	return billboard
@@ -160,7 +160,7 @@ Universal:CreateToggle({
              	  local h = Instance.new("Highlight",v.Character)
               	  h.Name = "esp"
               	  h.FillColor = uplr.Color
-				  billboard(v.HumanoidRootPart,v.DisplayName.."(@"..plr.Name..") | ..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  billboard(v.HumanoidRootPart,v.DisplayName.."(@"..plr.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
             	end
         	end
 			task.wait(1)
@@ -203,7 +203,7 @@ forsaken:CreateToggle({
              	  local h = Instance.new("Highlight",v.Character)
               	  h.Name = "esp"
               	  h.FillColor = splr.Color
-				  billboard(v.HumanoidRootPart,v.DisplayName.."(@"..plr.Name..") | ..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  billboard(v.HumanoidRootPart,v.DisplayName.."(@"..plr.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
             	end
         	end
 			task.wait(1)
@@ -243,7 +243,7 @@ forsaken:CreateToggle({
              	  local h = Instance.new("Highlight",v.Character)
               	  h.Name = "esp"
               	  h.FillColor = kplr.Color
-				  billboard(v.HumanoidRootPart,v.DisplayName.."(@"..plr.Name..") | ..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  billboard(v.HumanoidRootPart,v.DisplayName.."(@"..plr.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
             	end
         	end
 			task.wait(1)
@@ -290,10 +290,10 @@ forsaken:CreateToggle({
     	end
 	else
 		flags.esp4 = nil
-		for i,v in pairs(game.Players:GetPlayers()) do
-            if v.Character and v.Character:FindFirstChild("esp") then
-        	  v.Character.esp:Destroy()
-			  v.Character.HumanoidRootPart.BB:Destroy()
+		for i,v in pairs(workspace.Map.Ingame:GetDescendants()) do
+            if v:IsA("Tool") and v:FindFirstChild("esp") then
+        	  v.esp:Destroy()
+			  v.BB:Destroy()
             end
         end
 	end
