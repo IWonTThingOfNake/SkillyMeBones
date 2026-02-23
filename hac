@@ -1,5 +1,6 @@
 -- lpldqpldpqwdlpqp
 -- pkqwjdpoqjdpojqpodjqodjqwdjpoqjpoqjdpqoj
+-- qjhdqpjdpoqjdpoqjdopqjpodqjpodqjpodqjpodjqw
 
 local TweenService = game:GetService("TweenService")
 
@@ -127,14 +128,15 @@ Universal:CreateToggle({
    Callback = function(Value)
     if Value == true then
 		flags.esp = true
-		while flag.esp == true do
-        	for i,plr in pairs(game.Players:GetPlayers()) do
-            	if not plr.Character:FindFirstChild("esp") then
-             	   local h = Instance.new("Highlight",plr.Character)
+		while flags.esp == true do
+        	for i,v in pairs(game.Players:GetPlayers()) do
+            	if v.Character and not v.Character:FindFirstChild("esp") then
+             	  local h = Instance.new("Highlight",v.Character)
               	  h.Name = "esp"
               	  h.FillColor = Color3.new(1,0,0)
-           	 end
+            	end
         	end
+			task.wait(1)
     	end
 	else
 		flags.esp = nil
