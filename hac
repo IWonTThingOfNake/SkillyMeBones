@@ -4,9 +4,28 @@
 -- jqojdpoqjopdqjpoqjpojpojpoqjdpjqoj
 -- djqopdjqpodjqwqdqwd
 -- dqwdoqjqpqjdopqjdpoqjdpoqjpoqjd
+-- lpldqpldpqwdlpqp
+-- pkqwjdpoqjdpojqpodjqodjqwdjpoqjpoqjdpqoj
+-- qjhdqpjdpoqjdpoqjdopqjpodqjpodqjpodqjpodjqw
+-- jqojdpoqjopdqjpoqjpojpojpoqjdpjqoj
+-- djqopdjqpodjqwqdqwd
+-- dqwdoqjqpqjdopqjdpoqjdpoqjpoqjd
+-- lpldqpldpqwdlpqp
+-- pkqwjdpoqjdpojqpodjqodjqwdjpoqjpoqjdpqoj
+-- qjhdqpjdpoqjdpoqjdopqjpodqjpodqjpodqjpodjqw
+-- jqojdpoqjopdqjpoqjpojpojpoqjdpjqoj
+-- djqopdjqpodjqwqdqwd
+-- dqwdoqjqpqjdopqjdpoqjdpoqjpoqjd
+-- lpldqpldpqwdlpqp
+-- pkqwjdpoqjdpojqpodjqodjqwdjpoqjpoqjdpqoj
+-- qjhdqpjdpoqjdpoqjdopqjpodqjpodqjpodqjpodjqw
+-- jqojdpoqjopdqjpoqjpojpojpoqjdpjqoj
+-- djqopdjqpodjqwqdqwd
+-- dqwdoqjqpqjdopqjdpoqjdpoqjpoqjd
 
 print("V0 - ESP testing")
 print("V0.1 - ESP Addons/Fixes")
+print("V0.2 - Gen ESP Fix + Auto Gen + Speed Multiplier")
 
 local TweenService = game:GetService("TweenService")
 
@@ -261,7 +280,7 @@ forsaken:CreateToggle({
 		flags.esp5 = true
 		while flags.esp5 == true do
         	for i,v in pairs(workspace.Map.Ingame:GetDescendants()) do
-            	if v.Name == "Generator" and v:IsA("Model") and not v:FindFirstChild("esp") then
+            	if v.Name == "Generator" and v:IsA("Model") and not v:FindFirstChild("esp") and not v.Parent.Name == "Instances" then
              	 task.spawn(function()
 					 local h = Instance.new("Highlight",v)
               	  	h.Name = "esp"
@@ -309,7 +328,7 @@ forsaken:CreateToggle({
 		flags.gen = true
 		while flags.gen == true do
 			for i,v in pairs(workspace.Map.Ingame:GetDescendants()) do
-            	if v.Name == "Generator" and v:IsA("Model") then
+            	if v.Name == "Generator" and v:IsA("Model") and v.Parent.Name ~= "Instances" then
              		v.Remotes.RE:FireServer()
             	end
         	end
@@ -319,6 +338,19 @@ forsaken:CreateToggle({
 		flags.gen = false
 	end
 end,
+})
+
+forsaken:CreateSlider({
+   Name = "Speed Multiplier",
+   Range = {1,100},
+   Increment = 1,
+   Suffix = "Multiplier",
+   CurrentValue = 1,
+   Flag = "Slider2", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   -- The function that takes place when the slider changes
+   -- The variable (Value) is a number that correlates to the value the slider is currently at
+   end,
 })
 
 local misc = Window:CreateTab("Misc", "rewind")
