@@ -360,7 +360,7 @@ loriNightmare:CreateToggle({
 	else
 		flags.N = nil
 		for i,v in pairs(game.Players:GetPlayers()) do
-            if v.Character:FindFirstChild("esp") and v:GetAttribute("Monster") then
+            if v.Character:FindFirstChild("esp") and v.Character:GetAttribute("Monster") then
         	  v.esp:Destroy()
 			  v.BB:Destroy()
             end
@@ -403,7 +403,7 @@ loriNightmare:CreateToggle({
 	else
 		flags.C = nil
 		for i,v in pairs(game.Players:GetPlayers()) do
-            if v.Character:FindFirstChild("esp") and v:GetAttribute("Survivor") then
+            if v.Character:FindFirstChild("esp") and v.Character:GetAttribute("Survivor") then
         	  v.esp:Destroy()
 			  v.BB:Destroy()
             end
@@ -434,7 +434,7 @@ loriNightmare:CreateToggle({
 				if v.Name ~= "DangerToMonster" then
 					for i,machine in pairs(v.Machines:GetChildren()) do
 						if not machine:FindFirstChild("esp") then
-							local h = Instance.new("Highlight",v.Character)
+							local h = Instance.new("Highlight",machine)
               	  			h.Name = "esp"
               	 			h.FillColor = LN_M.Color
 				  			local b = billboard(machine,"Machine | "..machine:GetAttribute("Percentage").."/100%")
@@ -460,6 +460,15 @@ loriNightmare:CreateToggle({
 				end
         	end
 	end
+end,
+})
+
+loriNightmare:CreateToggle({
+   Name = "Auto Machine",
+   CurrentValue = false,
+   Flag = "LN_Togg", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+	
 end,
 })
 
