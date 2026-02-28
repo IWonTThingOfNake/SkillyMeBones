@@ -401,8 +401,8 @@ loriNightmare:CreateToggle({
 		flags.N = nil
 		for i,v in pairs(game.Players:GetPlayers()) do
             if v.Character:FindFirstChild("esp") and v.Character:GetAttribute("Monster") then
-        	  v.esp:Destroy()
-			  v.BB:Destroy()
+        	  v.Character.esp:Destroy()
+			  v.Character.BB:Destroy()
             end
         end
 	end
@@ -444,8 +444,8 @@ loriNightmare:CreateToggle({
 		flags.C = nil
 		for i,v in pairs(game.Players:GetPlayers()) do
             if v.Character:FindFirstChild("esp") and v.Character:GetAttribute("Survivor") then
-        	  v.esp:Destroy()
-			  v.BB:Destroy()
+        	  v.Character.esp:Destroy()
+			  v.Character.BB:Destroy()
             end
         end
 	end
