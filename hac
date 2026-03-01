@@ -1,8 +1,41 @@
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+-- ok so now that this is here, it should update faster, POSTRA POSTRA
+
+
+print([[
+UPDATE LOG
+1/3/26 - Added DOD + Fixed many... MANY bugs.
+]]
+
 local TweenService = game:GetService("TweenService")
 
 local plr = game.Players.LocalPlayer
 
+print("Init")
+
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+print("Rayfield Opening?")
 
 local Window = Rayfield:CreateWindow({
    Name = "skilly me bones",
@@ -41,7 +74,11 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
+print("ok")
+
 Window.ModifyTheme('Amethyst')
+
+print("Themed")
 
 local function billboard(char,txt)
 	local billboard = Instance.new("BillboardGui",char)
@@ -157,7 +194,7 @@ Universal:CreateButton({
    end,
 })
 
-
+print("UNIVERSAL")
 
 
 
@@ -394,7 +431,7 @@ forsaken:CreateSlider({
    end,
 })
 
-
+print("FORSAKEN")
 
 
 
@@ -545,6 +582,11 @@ end,
 })
 
 
+print("LORI'S NIGHTMARE")
+
+
+
+
 
 
 
@@ -617,7 +659,7 @@ DOD:CreateToggle({
     if Value == true then
 		flags.ki = true
 		while flags.ki == true do
-        	for i,x in pairs(workspace.GameAssets.Team.Killer:GetChildren())) do
+        	for i,x in pairs(workspace.GameAssets.Team.Killer:GetChildren()) do
 				local v = game.Players:GetPlayerFromCharacter(x)
             	if v.Character and not v.Character:FindFirstChild("esp") then
              	  local h = Instance.new("Highlight",v.Character)
@@ -633,7 +675,7 @@ DOD:CreateToggle({
     	end
 	else
 		flags.ki = nil
-		for i,v in pairs(workspace.GameAssets.Team.Killer:GetChildren())) do
+		for i,v in pairs(workspace.GameAssets.Team.Killer:GetChildren()) do
             if v and v:FindFirstChild("esp") then
         	  v.esp:Destroy()
 			  v.HumanoidRootPart.BB:Destroy()
@@ -752,12 +794,15 @@ DOD:CreateToggle({
 				end
 			end
 
-			TXT.Text = "Next Killer Is: "..v.DisplayName.."(@"..v.DisplayName..")"
+			TXT.Text = "Next Killer Is: "..t.DisplayName.."(@"..t.DisplayName..")"
 			task.wait(0.5)
     	end
 	else
 		flags.SNKD = nil
-		storedAssets["ShowNextKiller"].Parent = storedAssets
+		TXT.Parent = storedAssets
 	end
 end,
 })
+
+
+print("DOD")
