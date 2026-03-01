@@ -41,6 +41,8 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
+Window.ModifyTheme('Amethyst')
+
 local function billboard(char,txt)
 	local billboard = Instance.new("BillboardGui",char)
 	billboard.AlwaysOnTop = true
@@ -63,40 +65,37 @@ local flags = {}
 
 local Universal = Window:CreateTab("Universal", "rewind")
 
-Universal:CreateSlider({
+Universal:CreateInput({
    Name = "WalkSpeed",
-   Range = {0,1000},
-   Increment = 1,
-   Suffix = "Interval",
-   CurrentValue = 16,
-   Flag = "ws", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-	_plr.Character.Humanoid.WalkSpeed = Value
+   CurrentValue = "16",
+   PlaceholderText = "16",
+   RemoveTextAfterFocusLost = false,
+   Flag = "c",
+   Callback = function(Text)
+   	_plr.Character.Humanoid.WalkSpeed = tonumber(Text)
    end,
 })
 
 if _plr.Character.Humanoid.UseJumpPower == true then
-	Universal:CreateSlider({
+	Universal:CreateInput({
    		Name = "JumpPower",
-   		Range = {0,1000},
-   		Increment = 1,
-   		Suffix = "Interval",
-   		CurrentValue = 50,
-   		Flag = "jp", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   		Callback = function(Value)
-			_plr.Character.Humanoid.JumpPower = Value
+   		CurrentValue = "50",
+   		PlaceholderText = "50",
+   		RemoveTextAfterFocusLost = false,
+   		Flag = "b",
+   		Callback = function(Text)
+   			_plr.Character.Humanoid.JumpPower = tonumber(Text)
    		end,
 	})
 else
-	Universal:CreateSlider({
+	Universal:CreateInput({
    		Name = "JumpHeight",
-   		Range = {0,1000},
-   		Increment = 1,
-   		Suffix = "Interval",
-   		CurrentValue = 7.2,
-   		Flag = "jh", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   		Callback = function(Value)
-			_plr.Character.Humanoid.JumpHeight = Value
+   		CurrentValue = "7.2",
+   		PlaceholderText = "7.2",
+   		RemoveTextAfterFocusLost = false,
+   		Flag = "a",
+   		Callback = function(Text)
+   			_plr.Character.Humanoid.JumpHeight = tonumber(Text)
    		end,
 	})
 end
@@ -402,7 +401,7 @@ loriNightmare:CreateToggle({
 		for i,v in pairs(game.Players:GetPlayers()) do
             if v.Character:FindFirstChild("esp") and v.Character:GetAttribute("Monster") then
         	  v.Character.esp:Destroy()
-			  v.Character.BB:Destroy()
+			  v.Character.HumanoidRootPart.BB:Destroy()
             end
         end
 	end
@@ -445,7 +444,7 @@ loriNightmare:CreateToggle({
 		for i,v in pairs(game.Players:GetPlayers()) do
             if v.Character:FindFirstChild("esp") and v.Character:GetAttribute("Survivor") then
         	  v.Character.esp:Destroy()
-			  v.Character.BB:Destroy()
+			  v.Character.HumanoidRootPart.BB:Destroy()
             end
         end
 	end
@@ -479,7 +478,7 @@ loriNightmare:CreateToggle({
               	 			h.FillColor = LN_M.Color
 				  			local b = billboard(machine,"Machine | "..machine:GetAttribute("Percentage").."/100%")
 				  			machine:GetAttributeChangedSignal("Percentage"):Connect(function()
-								b.TextLabel.Text = "Machine | "..machine:GetAttribute("Percentage").."/100%"
+								b.TextLabel.Text = "Machine | "..math.round(machine:GetAttribute("Percentage")).."/100%"
 				  			end)
 						end
 					end
@@ -500,15 +499,6 @@ loriNightmare:CreateToggle({
 				end
         	end
 	end
-end,
-})
-
-loriNightmare:CreateToggle({
-   Name = "Auto Machine",
-   CurrentValue = false,
-   Flag = "LN_Togg", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-	
 end,
 })
 
