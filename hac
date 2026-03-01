@@ -60,10 +60,16 @@ local function billboard(char,txt)
 end
 
 local _plr = game.Players.LocalPlayer
+local storedAssets = Instance.new("Folder",workspace)
+storedAssets.Name = "CLIENT_STOREDASSETS_SKILLYMEBONES"
 
 local flags = {}
 
+
+
 local Universal = Window:CreateTab("Universal", "rewind")
+
+Universal:CreateSection("Humanoid")
 
 Universal:CreateInput({
    Name = "WalkSpeed",
@@ -99,6 +105,8 @@ else
    		end,
 	})
 end
+
+Universal:CreateSection("ESP")
 
 local uplr = Universal:CreateColorPicker({
     Name = "Player ESP Color",
@@ -140,8 +148,27 @@ Universal:CreateToggle({
 end,
 })
 
+Universal:CreateSection("Misc")
+
+Universal:CreateButton({
+   Name = "Remove UI",
+   Callback = function()
+     Rayfield:Destroy()
+   end,
+})
+
+
+
+
+
+
+
+
+
 
 local forsaken = Window:CreateTab("Forsaken", "rewind")
+
+forsaken:CreateSection("ESP")
 
 local splr = forsaken:CreateColorPicker({
     Name = "Survivor ESP Color",
@@ -316,6 +343,8 @@ forsaken:CreateToggle({
 end,
 })
 
+forsaken:CreateSection("Generator")
+
 local Slider = forsaken:CreateSlider({
    Name = "Auto Gen Interval",
    Range = {1,2},
@@ -350,6 +379,8 @@ forsaken:CreateToggle({
 end,
 })
 
+forsaken:CreateSection("Character")
+
 forsaken:CreateSlider({
    Name = "Speed Multiplier",
    Range = {1,100},
@@ -363,7 +394,18 @@ forsaken:CreateSlider({
    end,
 })
 
+
+
+
+
+
+
+
+
+
 local loriNightmare = Window:CreateTab("Lori's Nightmare", "rewind")
+
+loriNightmare:CreateSection("ESP")
 
 local LN_Killer = loriNightmare:CreateColorPicker({
     Name = "Nightmare ESP Color",
@@ -502,10 +544,220 @@ loriNightmare:CreateToggle({
 end,
 })
 
-local misc = Window:CreateTab("Misc", "rewind")
-misc:CreateButton({
-   Name = "Remove UI",
-   Callback = function()
-     Rayfield:Destroy()
+
+
+
+
+
+
+
+local DOD = Window:CreateTab("Die of Death", "rewind")
+
+DOD:CreateSection("ESP")
+
+local civil = DOD:CreateColorPicker({
+    Name = "Civilian ESP Color",
+    Color = Color3.fromRGB(0,255,0),
+    Flag = "dod", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+DOD:CreateToggle({
+   Name = "Civilian ESP",
+   CurrentValue = false,
+   Flag = "dod1", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.ci = true
+		while flags.ci == true do
+        	for i,x in pairs(workspace.GameAssets.Team.Survivor:GetChildren()) do
+				local v = game.Players:GetPlayerFromCharacter(x)
+            	if v.Character and not v.Character:FindFirstChild("esp") then
+             	  local h = Instance.new("Highlight",v.Character)
+              	  h.Name = "esp"
+              	  h.FillColor = civil.Color
+				  local b = billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  v.Character.Humanoid.HealthChanged:Connect(function(hp)
+					b.TextLabel.Text = v.DisplayName.."(@"..v.Name..") | "..math.round(hp).."/"..math.round(v.Character.Humanoid.MaxHealth)
+				  end)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.ci = nil
+		for i,v in pairs(workspace.GameAssets.Team.Survivor:GetChildren()) do
+            if v and v:FindFirstChild("esp") then
+        	  v.esp:Destroy()
+			  v.HumanoidRootPart.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+local dodK = DOD:CreateColorPicker({
+    Name = "Killer ESP Color",
+    Color = Color3.fromRGB(255,0,0),
+    Flag = "dod22", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+DOD:CreateToggle({
+   Name = "Killer ESP",
+   CurrentValue = false,
+   Flag = "dod55", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.ki = true
+		while flags.ki == true do
+        	for i,x in pairs(workspace.GameAssets.Team.Killer:GetChildren())) do
+				local v = game.Players:GetPlayerFromCharacter(x)
+            	if v.Character and not v.Character:FindFirstChild("esp") then
+             	  local h = Instance.new("Highlight",v.Character)
+              	  h.Name = "esp"
+              	  h.FillColor = dodK.Color
+				  local b = billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  v.Character.Humanoid.HealthChanged:Connect(function(hp)
+					b.TextLabel.Text = v:GetAttribute("KillerName").." / "..v.DisplayName.."(@"..v.Name..") | "..hp.."/"..v.Character.Humanoid.MaxHealth
+				  end)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.ki = nil
+		for i,v in pairs(workspace.GameAssets.Team.Killer:GetChildren())) do
+            if v and v:FindFirstChild("esp") then
+        	  v.esp:Destroy()
+			  v.HumanoidRootPart.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+DOD:CreateSection("Speed")
+
+DOD:CreateInput({
+   Name = "WalkSpeed",
+   CurrentValue = "10.5",
+   PlaceholderText = "10.5",
+   RemoveTextAfterFocusLost = false,
+   Flag = "coconut",
+   Callback = function(Text)
+   	_plr.Character:SetAttribute("WalkSpeed",tonumber(Text))
    end,
+})
+
+DOD:CreateInput({
+   Name = "SprintSpeed",
+   CurrentValue = "26",
+   PlaceholderText = "26",
+   RemoveTextAfterFocusLost = false,
+   Flag = "coconut2",
+   Callback = function(Text)
+   	_plr.Character:SetAttribute("SprintSpeed",tonumber(Text))
+   end,
+})
+
+local mod = DOD:CreateInput({
+   Name = "Speed Modifier",
+   CurrentValue = "0",
+   PlaceholderText = "0",
+   RemoveTextAfterFocusLost = false,
+   Flag = "coconut3",
+   Callback = function(Text)
+   	_plr.Character:SetAttribute("WalkSpeedModifier",tonumber(Text))
+   end,
+})
+
+DOD:CreateToggle({
+   Name = "Disable Negative Speed Modifier",
+   CurrentValue = false,
+   Flag = "opAf", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.cong = true
+		while flags.cong == true do
+        	if _plr.Character:GetAttribute("WalkSpeedModifier") < 0 then
+				_plr.Character:SetAttribute("WalkSpeedModifier", tonumber(mod.CurrentValue))
+			end
+			task.wait(0.05)
+    	end
+	else
+		flags.cong = nil
+	end
+end,
+})
+
+DOD:CreateSection("Abilities")
+
+local v0 = {
+"Adrenaline",
+"Banana",
+"Block",
+"BonusPad",
+"Caretaker",
+"Cloak",
+"Dash",
+"Hotdog",
+"Punch",
+"Revolver",
+"Taunt",
+}
+
+for i,v in pairs(v0) do
+	DOD:CreateButton({
+   		Name = "ABILITY: "..v,
+   		Callback = function()
+		   	game.ReplicatedStorage.Events.RemoteFunctions.UseAbility:InvokeServer(v)
+   		end,
+	})
+end
+
+DOD:CreateSection("Misc")
+
+local TXT = Instance.new("TextLabel",storedAssets)
+TXT.Name = "ShowNextKiller"
+TXT.Text = "Next Killer Is:"
+TXT.Size = UDim2.new(0.12,0,0.04,0)
+TXT.Position = UDim2.new(0.88,0,0,0)
+TXT.TextScaled = true
+TXT.TextColor3 = Color3.new(1,0,0)
+
+DOD:CreateToggle({
+   Name = "Show Next Killer",
+   CurrentValue = false,
+   Flag = "ShowNextKillerDOD", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.SNKD = true
+		while flags.SNKD == true do
+        	TXT.Parent = _plr.PlayerGui.MainGui
+
+			local highest = -1
+			local t
+			
+			for i,v in pairs(game.Players:GetPlayers()) do
+				if v.Stats.KillerChance.Value > highest then
+					highest = v.Stats.KillerChance.Value
+					t = v
+				end
+			end
+
+			TXT.Text = "Next Killer Is: "..v.DisplayName.."(@"..v.DisplayName..")"
+			task.wait(0.5)
+    	end
+	else
+		flags.SNKD = nil
+		storedAssets["ShowNextKiller"].Parent = storedAssets
+	end
+end,
 })
