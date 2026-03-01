@@ -584,7 +584,7 @@ loriNightmare:CreateToggle({
 end,
 })
 
-loriNightmare:CreateSection("Misc")
+loriNightmare:CreateSection("Teleports")
 
 loriNightmare:CreateButton({
    Name = "Teleport To Nightmare Room",
@@ -608,9 +608,23 @@ loriNightmare:CreateButton({
 })
 
 loriNightmare:CreateButton({
-   Name = "Teleport To Cutscene Room2",
+   Name = "Teleport To Nightmare Room",
    Callback = function()
-		_plr.Character:PivotTo(CFrame.new(-424.3,15.6,-41))
+		_plr.Character:PivotTo(CFrame.new(-599,3.4,-255))
+   end,
+})
+
+loriNightmare:CreateButton({
+   Name = "Teleport To All Coins",
+   Callback = function()
+		for i,folder in pairs(workspace.Map:GetChildren()) do
+			if folder.Name ~= "DangerToMonster" then
+				for i,v in pairs(folder.Items:GetChildren()) do
+					game.Players.LocalPlayer.Character:PivotTo(v:GetPivot())
+					task.wait(0.02)
+				end
+			end
+		end
    end,
 })
 
