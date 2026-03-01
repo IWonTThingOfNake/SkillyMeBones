@@ -662,7 +662,7 @@ DOD:CreateToggle({
     if Value == true then
 		flags.ci = true
 		while flags.ci == true do
-        	for i,x in pairs(workspace.GameAssets.Team.Survivor:GetChildren()) do
+        	for i,x in pairs(workspace.Map.GameAssets.Team.Survivor:GetChildren()) do
 				local v = game.Players:GetPlayerFromCharacter(x)
             	if v.Character and not v.Character:FindFirstChild("esp") then
              	  local h = Instance.new("Highlight",v.Character)
@@ -678,7 +678,7 @@ DOD:CreateToggle({
     	end
 	else
 		flags.ci = nil
-		for i,v in pairs(workspace.GameAssets.Team.Survivor:GetChildren()) do
+		for i,v in pairs(workspace.Map.GameAssets.Team.Survivor:GetChildren()) do
             if v and v:FindFirstChild("esp") then
         	  v.esp:Destroy()
 			  v.HumanoidRootPart.BB:Destroy()
@@ -706,7 +706,7 @@ DOD:CreateToggle({
     if Value == true then
 		flags.ki = true
 		while flags.ki == true do
-        	for i,x in pairs(workspace.GameAssets.Team.Killer:GetChildren()) do
+        	for i,x in pairs(workspace.Map.GameAssets.Team.Killer:GetChildren()) do
 				local v = game.Players:GetPlayerFromCharacter(x)
             	if v.Character and not v.Character:FindFirstChild("esp") then
              	  local h = Instance.new("Highlight",v.Character)
@@ -722,7 +722,7 @@ DOD:CreateToggle({
     	end
 	else
 		flags.ki = nil
-		for i,v in pairs(workspace.GameAssets.Team.Killer:GetChildren()) do
+		for i,v in pairs(workspace.Map.GameAssets.Team.Killer:GetChildren()) do
             if v and v:FindFirstChild("esp") then
         	  v.esp:Destroy()
 			  v.HumanoidRootPart.BB:Destroy()
