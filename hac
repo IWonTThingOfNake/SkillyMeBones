@@ -2,6 +2,7 @@ print([[
 UPDATE LOG
 1/3/26 - Added DOD + Fixed many... MANY bugs.
 3/3/26 - Added Grace, new things to Universal and Fixed some bugs.
+5/3/26 - Added new stuff to Forsaken and Universal, rewrote some code, made some (custom) humanoid stats refresh if changed.
 ]])
 
 local TweenService = game:GetService("TweenService")
@@ -78,6 +79,7 @@ end
 local _plr = game.Players.LocalPlayer
 local storedAssets = Instance.new("Folder",workspace)
 storedAssets.Name = "CLIENT_STOREDASSETS_SKILLYMEBONES"
+local storedData = {}
 
 local flags = {}
 
@@ -87,7 +89,7 @@ local Universal = Window:CreateTab("Universal", "rewind")
 
 Universal:CreateSection("Humanoid")
 
-Universal:CreateInput({
+local UNIVERSAL_WS = Universal:CreateInput({
    Name = "WalkSpeed",
    CurrentValue = "16",
    PlaceholderText = "16",
@@ -176,6 +178,38 @@ Universal:CreateToggle({
         end
 	end
 end,
+})
+
+Universal:CreateSection("Teleport")
+
+storedData.names = {}
+
+local function getAllPlayers()
+	local names = storedData.names
+
+	for _, player in ipairs(game.Players:GetPlayers()) do
+    	table.insert(names, player.Name)
+	end
+
+	return table.concat(names, ", ")
+end
+
+local tptoplr = Universal:CreateDropdown({
+   Name = "Teleport to player",
+   Options = getAllPlayers(),
+   CurrentOption = getAllPlayers()[1],
+   MultipleOptions = false,
+   Flag = "Dropdown1", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Options)
+   		_plr.Character:PivotTo(game.Players:FindFirstChild(Options[1]).Character:GetPivot())
+   end,
+})
+
+Universal:CreateButton({
+   Name = "Teleport 10 studs above",
+   Callback = function()
+     _plr.Character:PivotTo(_plr.Character:GetPivot() * CFrame.new(0,10,0))
+   end,
 })
 
 Universal:CreateSection("Misc")
@@ -386,17 +420,14 @@ end,
 
 forsaken:CreateSection("Generator")
 
-local Slider = forsaken:CreateSlider({
-   Name = "Auto Gen Interval",
-   Range = {1,2},
-   Increment = 0.1,
-   Suffix = "Interval",
-   CurrentValue = 1.8,
-   Flag = "Slider1", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-   -- The function that takes place when the slider changes
-   -- The variable (Value) is a number that correlates to the value the slider is currently at
-   end,
+local Slider = Universal:CreateInput({
+   	Name = "Auto Gen Interval",
+   	CurrentValue = "1.8",
+   	PlaceholderText = "1+ recommended",
+   	RemoveTextAfterFocusLost = false,
+   	Flag = "holyCopy",
+   	Callback = function(Text)
+   	end,
 })
 
 forsaken:CreateToggle({
@@ -422,17 +453,35 @@ end,
 
 forsaken:CreateSection("Character")
 
-forsaken:CreateSlider({
-   Name = "Speed Multiplier",
-   Range = {1,100},
-   Increment = 1,
-   Suffix = "Multiplier",
-   CurrentValue = 1,
-   Flag = "Slider2", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+forsaken:CreateInput({
+   	Name = "SpeedMultiplier",
+   	CurrentValue = "1",
+   	PlaceholderText = "<4 recommended",
+   	RemoveTextAfterFocusLost = false,
+   	Flag = "imfastafboi",
+   	Callback = function(Text)
+		_plr.Character.SpeedMultipliers.Sprinting.Value = tonumber(Text)
+   	end,
+})
+
+forsaken:CreateSection("Combat")
+
+local FORSAKEN_DISTANCE = forsaken:CreateInput({
+   	Name = "Hitbox Distance Autoblock",
+   	CurrentValue = "9",
+   	PlaceholderText = "9+ recommended",
+   	RemoveTextAfterFocusLost = false,
+   	Flag = "thisisntthebestyk?",
+   	Callback = function(Text)
+   	end,
+})
+
+local FORSAKEN_HITBOX = forsaken:CreateToggle({
+   Name = "Terrible Auto Block",
+   CurrentValue = false,
+   Flag = "imtryingok?", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(Value)
-   -- The function that takes place when the slider changes
-   -- The variable (Value) is a number that correlates to the value the slider is currently at
-   end,
+end,
 })
 
 print("FORSAKEN")
@@ -908,9 +957,41 @@ local graceJP = Grace:CreateInput({
 print("GRACE")
 
 
-print("INITIALIZING RENDERSTEP")
+print("INITIALIZING MISC THINGS")
 
 game:GetService("RunService").RenderStepped:Connect(function()
+	-- GRACE
 	_plr.Character.Humanoid:SetAttribute("SprintSpeed",tonumber(graceSpeed.CurrentValue))
 	_plr.Character.Humanoid.JumpPower = tonumber(graceJP.CurrentValue)
+
+	-- FORSAKEN
+
+	if FORSAKEN_HITBOX.CurrentValue == true then
+		if workspace:FindFirstChild("Hitboxes") then
+			for i,v in pairs(workspace.Hitboxes:GetChildren()) do
+				if v.Name ~= _plr.Name.."Hitbox" then
+					local username = v.Name:match("^(.-)Hitbox")
+
+					if tostring(game.Players[username].Character.Parent) ~= tostring(_plr.Character.Parent) then
+						if (_plr.Character:GetPivot().Position - v.Position).Magnitude <= tonumber(FORSAKEN_DISTANCE.CurrentValue) then
+							game.ReplicatedStorage.Modules.Network.RemoteEvent:FireServer(
+								"UseActorAbility",
+								{buffer.fromstring("\003\005\000\000\000Block")}
+							)
+						end
+					end
+				end
+			end
+		end
+	end
+
+	-- UNIVERSAL
+
+	if tonumber(UNIVERSAL_WS.CurrentValue) ~= 16 then
+		_plr.Character.Humanoid.WalkSpeed = tonumber(UNIVERSAL_WS.CurrentValue)
+	end
+end)
+
+game.Players.ChildAdded:Connect(function()
+	tptoplr:Refresh(getAllPlayers())
 end)
