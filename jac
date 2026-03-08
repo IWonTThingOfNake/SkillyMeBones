@@ -1,0 +1,1144 @@
+print([[
+UPDATE LOG
+1/3/26 - Added DOD + Fixed many... MANY bugs.
+3/3/26 - Added Grace, new things to Universal and Fixed some bugs.
+5/3/26 - Added new stuff to Forsaken and Universal, rewrote some code, made some (custom) humanoid stats refresh if changed.
+08/3/26 - Fixed bug
+]])
+
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+-- QODJQOJDQOWJDPOQJDPOQJDPOQJDOQOPQJDOPQJDPQO
+
+local TweenService = game:GetService("TweenService")
+
+local plr = game.Players.LocalPlayer
+local val = false
+
+task.delay(4,function()
+	if val == false then
+		warn("SkillyMeBones has not been ran due to an error. Or ur just lagging...")
+	end
+end)
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+val = true
+
+local Window = Rayfield:CreateWindow({
+   Name = "skilly me bones",
+   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "Rayfield Interface Suite",
+   LoadingSubtitle = "by Sirius",
+   ShowText = "Rayfield", -- for mobile users to unhide Rayfield, change if you'd like
+   Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   ToggleUIKeybind = "K", -- The keybind to toggle the UI visibility (string like "K" or Enum.KeyCode)
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, -- Prevents Rayfield from emitting warnings when the script has a version mismatch with the interface.
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Big Hub"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include Discord.gg/. E.g. Discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the Discord every time they load it up
+   },
+
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+      FileName = "Key", -- It is recommended to use something unique, as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that the system will accept, can be RAW file links (pastebin, github, etc.) or simple strings ("hello", "key22")
+   }
+})
+
+Window.ModifyTheme('Amethyst')
+
+print("NO IT WONT YESSS")
+
+local function billboard(char,txt)
+	local billboard = Instance.new("BillboardGui",char)
+	billboard.AlwaysOnTop = true
+	billboard.Size = UDim2.new(0,200,0,50)
+	billboard.Adornee = char
+	local textlabel = Instance.new("TextLabel",billboard)
+	textlabel.Size = UDim2.new(1,0,1,0)
+	textlabel.Text = txt
+	billboard.Name = "BB"
+	textlabel.TextColor3 = Color3.new(1,1,1)
+	textlabel.TextScaled = true
+	textlabel.TextStrokeTransparency = 0
+	textlabel.BackgroundTransparency = 1
+	return billboard
+end
+
+local _plr = game.Players.LocalPlayer
+local storedAssets = Instance.new("Folder",workspace)
+storedAssets.Name = "CLIENT_STOREDASSETS_SKILLYMEBONES"
+local storedData = {}
+
+local flags = {}
+
+
+
+local Universal = Window:CreateTab("Universal", "rewind")
+
+Universal:CreateSection("Humanoid")
+
+local UNIVERSAL_WS = Universal:CreateInput({
+   Name = "WalkSpeed",
+   CurrentValue = "16",
+   PlaceholderText = "16",
+   RemoveTextAfterFocusLost = false,
+   Flag = "c",
+   Callback = function(Text)
+   	_plr.Character.Humanoid.WalkSpeed = tonumber(Text)
+   end,
+})
+
+if _plr.Character.Humanoid.UseJumpPower == true then
+	Universal:CreateInput({
+   		Name = "JumpPower",
+   		CurrentValue = "50",
+   		PlaceholderText = "50",
+   		RemoveTextAfterFocusLost = false,
+   		Flag = "b",
+   		Callback = function(Text)
+   			_plr.Character.Humanoid.JumpPower = tonumber(Text)
+   		end,
+	})
+else
+	Universal:CreateInput({
+   		Name = "JumpHeight",
+   		CurrentValue = "7.2",
+   		PlaceholderText = "7.2",
+   		RemoveTextAfterFocusLost = false,
+   		Flag = "a",
+   		Callback = function(Text)
+   			_plr.Character.Humanoid.JumpHeight = tonumber(Text)
+   		end,
+	})
+end
+
+local infJumpOn = Universal:CreateToggle({
+   Name = "Infinite Jump",
+   CurrentValue = false,
+   Flag = "IBelieveICanFly", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   end,
+})
+
+game:GetService("UserInputService").JumpRequest:Connect(function()
+	if infJumpOn.CurrentValue == true and _plr.Character.Humanoid then
+		_plr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+	end
+end)
+
+Universal:CreateSection("ESP")
+
+local uplr = Universal:CreateColorPicker({
+    Name = "Player ESP Color",
+    Color = Color3.fromRGB(255,0,0),
+    Flag = "ColorPicker1", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+Universal:CreateToggle({
+   Name = "Player ESP",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.esp = true
+		while flags.esp == true do
+        	for i,v in pairs(game.Players:GetPlayers()) do
+            	if v.Character and not v.Character:FindFirstChild("esp") then
+             	  local h = Instance.new("Highlight",v.Character)
+              	  h.Name = "esp"
+              	  h.FillColor = uplr.Color
+				  billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..math.round(v.Character.Humanoid.Health).."/"..math.round(v.Character.Humanoid.MaxHealth))
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.esp = nil
+		for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Character and v.Character:FindFirstChild("esp") then
+        	  v.Character.esp:Destroy()
+			  v.Character.HumanoidRootPart.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+Universal:CreateSection("Teleport")
+
+storedData.names = {}
+
+local function getAllPlayers()
+	local names = storedData.names
+
+	for _, player in ipairs(game.Players:GetPlayers()) do
+    	table.insert(names, player.Name)
+	end
+
+	return table.concat(names, ", ")
+end
+
+local tptoplr = Universal:CreateDropdown({
+   Name = "Teleport to player",
+   Options = getAllPlayers(),
+   CurrentOption = getAllPlayers()[1],
+   MultipleOptions = false,
+   Flag = "Dropdown1", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Options)
+   		_plr.Character:PivotTo(game.Players:FindFirstChild(Options[1]).Character:GetPivot())
+   end,
+})
+
+Universal:CreateButton({
+   Name = "Teleport 10 studs above",
+   Callback = function()
+     _plr.Character:PivotTo(_plr.Character:GetPivot() * CFrame.new(0,10,0))
+   end,
+})
+
+Universal:CreateSection("Misc")
+
+Universal:CreateInput({
+   	Name = "Gravity",
+   	CurrentValue = "196.2",
+   	PlaceholderText = "196.2",
+   	RemoveTextAfterFocusLost = false,
+   	Flag = "abcdefghiHI",
+   	Callback = function(Text)
+   		workspace.Gravity = tonumber(Text)
+   	end,
+})
+
+Universal:CreateButton({
+   Name = "Remove UI",
+   Callback = function()
+     Rayfield:Destroy()
+   end,
+})
+
+print("UNIVERSAL")
+
+
+
+
+
+
+
+
+local forsaken = Window:CreateTab("Forsaken", "rewind")
+
+forsaken:CreateSection("ESP")
+
+local splr = forsaken:CreateColorPicker({
+    Name = "Survivor ESP Color",
+    Color = Color3.fromRGB(0,255,0),
+    Flag = "ColorPicker2", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+forsaken:CreateToggle({
+   Name = "Survivor ESP",
+   CurrentValue = false,
+   Flag = "Toggle2", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.esp3 = true
+		while flags.esp3 == true do
+        	for i,x in pairs(workspace.Players.Survivors:GetChildren()) do
+				local v = game.Players:GetPlayerFromCharacter(x)
+            	if v.Character and not v.Character:FindFirstChild("esp") then
+             	  local h = Instance.new("Highlight",v.Character)
+              	  h.Name = "esp"
+              	  h.FillColor = splr.Color
+				  local b = billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  v.Character.Humanoid.HealthChanged:Connect(function(hp)
+					b.TextLabel.Text = v.DisplayName.."(@"..v.Name..") | "..math.round(hp).."/"..math.round(v.Character.Humanoid.MaxHealth)
+				  end)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.esp3 = nil
+		for i,v in pairs(workspace.Players.Survivors:GetChildren()) do
+            if v and v:FindFirstChild("esp") then
+        	  v.esp:Destroy()
+			  v.HumanoidRootPart.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+local kplr = forsaken:CreateColorPicker({
+    Name = "Killer ESP Color",
+    Color = Color3.fromRGB(255,0,0),
+    Flag = "ColorPicker3", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+forsaken:CreateToggle({
+   Name = "Killer ESP",
+   CurrentValue = false,
+   Flag = "Toggle3", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.esp2 = true
+		while flags.esp2 == true do
+        	for i,x in pairs(workspace.Players.Killers:GetChildren()) do
+				local v = game.Players:GetPlayerFromCharacter(x)
+            	if v.Character and not v.Character:FindFirstChild("esp") then
+             	  local h = Instance.new("Highlight",v.Character)
+              	  h.Name = "esp"
+              	  h.FillColor = kplr.Color
+				  local b = billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  v.Character.Humanoid.HealthChanged:Connect(function(hp)
+					b.TextLabel.Text = v.DisplayName.."(@"..v.Name..") | "..hp.."/"..v.Character.Humanoid.MaxHealth
+				  end)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.esp2 = nil
+		for i,v in pairs(workspace.Players.Killers:GetChildren()) do
+            if v and v:FindFirstChild("esp") then
+        	  v.esp:Destroy()
+			  v.HumanoidRootPart.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+local te = forsaken:CreateColorPicker({
+    Name = "Item ESP Color",
+    Color = Color3.fromRGB(255,100,0),
+    Flag = "ColorPicker4", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+forsaken:CreateToggle({
+   Name = "Item ESP",
+   CurrentValue = false,
+   Flag = "Toggle4", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.esp4 = true
+		while flags.esp4 == true do
+        	for i,v in pairs(workspace.Map.Ingame:GetDescendants()) do
+            	if v:IsA("Tool") and not v:FindFirstChild("esp") then
+             	  local h = Instance.new("Highlight",v)
+              	  h.Name = "esp"
+              	  h.FillColor = te.Color
+				  billboard(v,v.Name)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.esp4 = nil
+		for i,v in pairs(workspace.Map.Ingame:GetDescendants()) do
+            if v:IsA("Tool") and v:FindFirstChild("esp") then
+        	  v.esp:Destroy()
+			  v.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+local ge = forsaken:CreateColorPicker({
+    Name = "Generator ESP Color",
+    Color = Color3.fromRGB(0,0,255),
+    Flag = "ColorPicker5", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+forsaken:CreateToggle({
+   Name = "Generator ESP",
+   CurrentValue = false,
+   Flag = "Toggle5", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.esp5 = true
+		while flags.esp5 == true do
+        	for i,v in pairs(workspace.Map.Ingame:GetDescendants()) do
+            	if v.Name == "Generator" and v:IsA("Model") and not v:FindFirstChild("esp") and not v.Parent.Name == "Instances" then
+             	 task.spawn(function()
+					 local h = Instance.new("Highlight",v)
+              	  	h.Name = "esp"
+              	  	h.FillColor = ge.Color
+				    local b = billboard(v.Main,v.Name.." | 0%")
+				  	v.Progress.Changed:Connect(function(newV)
+						b.TextLabel.Text = v.Name.." | ".. newV .."%"
+				    end)
+				 end)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.esp5 = nil
+		for i,v in pairs(workspace.Map.Ingame:GetDescendants()) do
+            if v.Name == "Generator" and v:IsA("Model") and v:FindFirstChild("esp") then
+        	  v.esp:Destroy()
+			  v.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+forsaken:CreateSection("Generator")
+
+local Slider = Universal:CreateInput({
+   	Name = "Auto Gen Interval",
+   	CurrentValue = "1.8",
+   	PlaceholderText = "1+ recommended",
+   	RemoveTextAfterFocusLost = false,
+   	Flag = "holyCopy",
+   	Callback = function(Text)
+   	end,
+})
+
+forsaken:CreateToggle({
+   Name = "Auto Gen",
+   CurrentValue = false,
+   Flag = "Toggle6", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.gen = true
+		while flags.gen == true do
+			for i,v in pairs(workspace.Map.Ingame:GetDescendants()) do
+            	if v.Name == "Generator" and v:IsA("Model") and v.Parent.Name ~= "Instances" then
+             		v.Remotes.RE:FireServer()
+            	end
+        	end
+			task.wait(Slider.CurrentValue)
+    	end
+	else
+		flags.gen = false
+	end
+end,
+})
+
+forsaken:CreateSection("Character")
+
+forsaken:CreateInput({
+   	Name = "SpeedMultiplier",
+   	CurrentValue = "1",
+   	PlaceholderText = "<4 recommended",
+   	RemoveTextAfterFocusLost = false,
+   	Flag = "imfastafboi",
+   	Callback = function(Text)
+		_plr.Character.SpeedMultipliers.Sprinting.Value = tonumber(Text)
+   	end,
+})
+
+forsaken:CreateSection("Combat")
+
+local FORSAKEN_DISTANCE = forsaken:CreateInput({
+   	Name = "Hitbox Distance Autoblock",
+   	CurrentValue = "9",
+   	PlaceholderText = "9+ recommended",
+   	RemoveTextAfterFocusLost = false,
+   	Flag = "thisisntthebestyk?",
+   	Callback = function(Text)
+   	end,
+})
+
+local FORSAKEN_HITBOX = forsaken:CreateToggle({
+   Name = "Terrible Auto Block",
+   CurrentValue = false,
+   Flag = "imtryingok?", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+end,
+})
+
+print("FORSAKEN")
+
+
+
+
+
+
+
+
+local loriNightmare = Window:CreateTab("Lori's Nightmare", "rewind")
+
+loriNightmare:CreateSection("ESP")
+
+local LN_Killer = loriNightmare:CreateColorPicker({
+    Name = "Nightmare ESP Color",
+    Color = Color3.fromRGB(0,0,0),
+    Flag = "LN_CP", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+loriNightmare:CreateToggle({
+   Name = "Nightmare ESP",
+   CurrentValue = false,
+   Flag = "LN_T", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.N = true
+		while flags.N == true do
+        	for i,v in pairs(game.Players:GetPlayers()) do
+            	if v.Character and not v.Character:FindFirstChild("esp") and v.Character:GetAttribute("Monster") then
+             	  local h = Instance.new("Highlight",v.Character)
+              	  h.Name = "esp"
+              	  h.FillColor = LN_Killer.Color
+				  local b = billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  v.Character.Humanoid.HealthChanged:Connect(function(hp)
+					b.TextLabel.Text = v.DisplayName.."(@"..v.Name..") | "..hp.."/"..v.Character.Humanoid.MaxHealth
+				  end)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.N = nil
+		for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Character:FindFirstChild("esp") and v.Character:GetAttribute("Monster") then
+        	  v.Character.esp:Destroy()
+			  v.Character.HumanoidRootPart.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+local LN_Survivor = loriNightmare:CreateColorPicker({
+    Name = "Children ESP Color",
+    Color = Color3.fromRGB(255,255,255),
+    Flag = "LN_Children", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+loriNightmare:CreateToggle({
+   Name = "Children ESP",
+   CurrentValue = false,
+   Flag = "LN_To", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.C = true
+		while flags.C == true do
+        	for i,v in pairs(game.Players:GetPlayers()) do
+            	if v.Character and not v.Character:FindFirstChild("esp") and v.Character:GetAttribute("Survivor") then
+             	  local h = Instance.new("Highlight",v.Character)
+              	  h.Name = "esp"
+              	  h.FillColor = LN_Survivor.Color
+				  local b = billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  v.Character.Humanoid.HealthChanged:Connect(function(hp)
+					b.TextLabel.Text = v.DisplayName.."(@"..v.Name..") | "..hp.."/"..v.Character.Humanoid.MaxHealth
+				  end)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.C = nil
+		for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Character:FindFirstChild("esp") and v.Character:GetAttribute("Survivor") then
+        	  v.Character.esp:Destroy()
+			  v.Character.HumanoidRootPart.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+local LN_M = loriNightmare:CreateColorPicker({
+    Name = "Machine ESP Color",
+    Color = Color3.fromRGB(255,70,0),
+    Flag = "LN_VHS", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+loriNightmare:CreateToggle({
+   Name = "Machine ESP",
+   CurrentValue = false,
+   Flag = "LN_Tog", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.M = true
+		while flags.M == true do
+        	for i,v in pairs(workspace.Map:GetChildren()) do
+				if v.Name ~= "DangerToMonster" then
+					for i,machine in pairs(v.Machines:GetChildren()) do
+						if not machine:FindFirstChild("esp") then
+							local h = Instance.new("Highlight",machine)
+              	  			h.Name = "esp"
+              	 			h.FillColor = LN_M.Color
+				  			local b = billboard(machine,"Machine | "..machine:GetAttribute("Percentage").."/100%")
+				  			machine:GetAttributeChangedSignal("Percentage"):Connect(function()
+								b.TextLabel.Text = "Machine | "..math.round(machine:GetAttribute("Percentage")).."/100%"
+				  			end)
+						end
+					end
+				end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.M = nil
+		for i,v in pairs(workspace.Map:GetChildren()) do
+				if v.Name ~= "DangerToMonster" then
+					for i,machine in pairs(v.Machines:GetChildren()) do
+						if machine:FindFirstChild("esp") then
+							machine.esp:Destroy()
+							machine.BB:Destroy()
+						end
+					end
+				end
+        	end
+	end
+end,
+})
+
+loriNightmare:CreateSection("Teleports")
+
+loriNightmare:CreateButton({
+   Name = "Teleport To Nightmare Room",
+   Callback = function()
+		_plr.Character:PivotTo(CFrame.new(-592,3.6,-230))
+   end,
+})
+
+loriNightmare:CreateButton({
+   Name = "Teleport To Cutscene Room1",
+   Callback = function()
+		_plr.Character:PivotTo(CFrame.new(-386,15.6,-29.1))
+   end,
+})
+
+loriNightmare:CreateButton({
+   Name = "Teleport To Cutscene Room2",
+   Callback = function()
+		_plr.Character:PivotTo(CFrame.new(-388.2,15.6,51.5))
+   end,
+})
+
+loriNightmare:CreateButton({
+   Name = "Teleport To Nightmare Room",
+   Callback = function()
+		_plr.Character:PivotTo(CFrame.new(-599,3.4,-255))
+   end,
+})
+
+loriNightmare:CreateButton({
+   Name = "Teleport To All Coins",
+   Callback = function()
+		for i,folder in pairs(workspace.Map:GetChildren()) do
+			if folder.Name ~= "DangerToMonster" then
+				for i,v in pairs(folder.Items:GetChildren()) do
+					game.Players.LocalPlayer.Character:PivotTo(v:GetPivot())
+					task.wait(0.02)
+				end
+			end
+		end
+   end,
+})
+
+
+print("LORI'S NIGHTMARE")
+
+
+
+
+
+
+
+
+
+
+local DOD = Window:CreateTab("Die of Death", "rewind")
+
+DOD:CreateSection("ESP")
+
+local civil = DOD:CreateColorPicker({
+    Name = "Civilian ESP Color",
+    Color = Color3.fromRGB(0,255,0),
+    Flag = "dod", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+DOD:CreateToggle({
+   Name = "Civilian ESP",
+   CurrentValue = false,
+   Flag = "dod1", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.ci = true
+		while flags.ci == true do
+        	for i,x in pairs(workspace.Map.GameAssets.Team.Survivor:GetChildren()) do
+				local v = game.Players:GetPlayerFromCharacter(x)
+            	if v.Character and not v.Character:FindFirstChild("esp") then
+             	  local h = Instance.new("Highlight",v.Character)
+              	  h.Name = "esp"
+              	  h.FillColor = civil.Color
+				  local b = billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  v.Character.Humanoid.HealthChanged:Connect(function(hp)
+					b.TextLabel.Text = v.DisplayName.."(@"..v.Name..") | "..math.round(hp).."/"..math.round(v.Character.Humanoid.MaxHealth)
+				  end)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.ci = nil
+		for i,v in pairs(workspace.Map.GameAssets.Team.Survivor:GetChildren()) do
+            if v and v:FindFirstChild("esp") then
+        	  v.esp:Destroy()
+			  v.HumanoidRootPart.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+local dodK = DOD:CreateColorPicker({
+    Name = "Killer ESP Color",
+    Color = Color3.fromRGB(255,0,0),
+    Flag = "dod22", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+DOD:CreateToggle({
+   Name = "Killer ESP",
+   CurrentValue = false,
+   Flag = "dod55", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.ki = true
+		while flags.ki == true do
+        	for i,x in pairs(workspace.Map.GameAssets.Team.Killer:GetChildren()) do
+				local v = game.Players:GetPlayerFromCharacter(x)
+            	if v.Character and not v.Character:FindFirstChild("esp") then
+             	  local h = Instance.new("Highlight",v.Character)
+              	  h.Name = "esp"
+              	  h.FillColor = dodK.Color
+				  local b = billboard(v.Character.HumanoidRootPart,v.DisplayName.."(@"..v.Name..") | "..v.Character.Humanoid.Health.."/"..v.Character.Humanoid.MaxHealth)
+				  v.Character.Humanoid.HealthChanged:Connect(function(hp)
+					b.TextLabel.Text = v:GetAttribute("KillerName").." / "..v.DisplayName.."(@"..v.Name..") | "..hp.."/"..v.Character.Humanoid.MaxHealth
+				  end)
+            	end
+        	end
+			task.wait(1)
+    	end
+	else
+		flags.ki = nil
+		for i,v in pairs(workspace.Map.GameAssets.Team.Killer:GetChildren()) do
+            if v and v:FindFirstChild("esp") then
+        	  v.esp:Destroy()
+			  v.HumanoidRootPart.BB:Destroy()
+            end
+        end
+	end
+end,
+})
+
+DOD:CreateSection("Speed")
+
+DOD:CreateInput({
+   Name = "WalkSpeed",
+   CurrentValue = "10.5",
+   PlaceholderText = "10.5",
+   RemoveTextAfterFocusLost = false,
+   Flag = "coconut",
+   Callback = function(Text)
+   	_plr.Character:SetAttribute("WalkSpeed",tonumber(Text))
+   end,
+})
+
+DOD:CreateInput({
+   Name = "SprintSpeed",
+   CurrentValue = "26",
+   PlaceholderText = "26",
+   RemoveTextAfterFocusLost = false,
+   Flag = "coconut2",
+   Callback = function(Text)
+   	_plr.Character:SetAttribute("SprintSpeed",tonumber(Text))
+   end,
+})
+
+local mod = DOD:CreateInput({
+   Name = "Speed Modifier",
+   CurrentValue = "0",
+   PlaceholderText = "0",
+   RemoveTextAfterFocusLost = false,
+   Flag = "coconut3",
+   Callback = function(Text)
+   	_plr.Character:SetAttribute("WalkSpeedModifier",tonumber(Text))
+   end,
+})
+
+DOD:CreateToggle({
+   Name = "Disable Negative Speed Modifier",
+   CurrentValue = false,
+   Flag = "opAf", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.cong = true
+		while flags.cong == true do
+        	if _plr.Character:GetAttribute("WalkSpeedModifier") < 0 then
+				_plr.Character:SetAttribute("WalkSpeedModifier", tonumber(mod.CurrentValue))
+			end
+			task.wait(0.05)
+    	end
+	else
+		flags.cong = nil
+	end
+end,
+})
+
+DOD:CreateSection("Abilities")
+
+local v0 = {
+"Adrenaline",
+"Banana",
+"Block",
+"BonusPad",
+"Caretaker",
+"Cloak",
+"Dash",
+"Hotdog",
+"Punch",
+"Revolver",
+"Taunt",
+}
+
+for i,v in pairs(v0) do
+	DOD:CreateButton({
+   		Name = "ABILITY: "..v,
+   		Callback = function()
+		   	game.ReplicatedStorage.Events.RemoteFunctions.UseAbility:InvokeServer(v)
+   		end,
+	})
+end
+
+DOD:CreateSection("Misc")
+
+local TXT = Instance.new("TextLabel",storedAssets)
+TXT.Name = "ShowNextKiller"
+TXT.Text = "Next Killer Is:"
+TXT.Size = UDim2.new(0.12,0,0.04,0)
+TXT.Position = UDim2.new(0.88,0,0,0)
+TXT.TextScaled = true
+TXT.TextColor3 = Color3.new(1,0,0)
+TXT.BackgroundTransparency = 1
+TXT.TextStrokeTransparency = 0
+
+DOD:CreateToggle({
+   Name = "Show Next Killer",
+   CurrentValue = false,
+   Flag = "ShowNextKillerDOD", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    if Value == true then
+		flags.SNKD = true
+		while flags.SNKD == true do
+        	TXT.Parent = _plr.PlayerGui.MainGui
+
+			local highest = -1
+			local t
+			
+			for i,v in pairs(game.Players:GetPlayers()) do
+				if v.Stats.KillerChance.Value > highest then
+					highest = v.Stats.KillerChance.Value
+					t = v
+				end
+			end
+
+			TXT.Text = "Next Killer Is: "..t.DisplayName.."(@"..t.Name..")"
+			task.wait(0.5)
+    	end
+	else
+		flags.SNKD = nil
+		TXT.Parent = storedAssets
+	end
+end,
+})
+
+
+print("DOD")
+
+
+
+
+
+
+
+
+
+
+
+local Grace = Window:CreateTab("Grace", "rewind")
+
+Grace:CreateSection("Lobby Exclusive")
+
+Grace:CreateButton({
+   	Name = "Bypass Barriers",
+   	Callback = function()
+		workspace.barriers:Destroy()
+   	end,
+})
+
+Grace:CreateSection("Ingame Exclusive")
+
+Grace:CreateSection("Humanoid")
+
+local graceSpeed = Grace:CreateInput({
+   Name = "SprintSpeed",
+   CurrentValue = "20",
+   PlaceholderText = "20",
+   RemoveTextAfterFocusLost = false,
+   Flag = "crage",
+   Callback = function(Text)
+   	_plr.Character.Humanoid:SetAttribute("SprintSpeed",tonumber(Text))
+   end,
+})
+
+local graceJP = Grace:CreateInput({
+   Name = "JumpPower",
+   CurrentValue = "0",
+   PlaceholderText = "0",
+   RemoveTextAfterFocusLost = false,
+   Flag = "crage",
+   Callback = function(Text)
+   	_plr.Character.Humanoid.JumpPower = tonumber(Text)
+   end,
+})
+
+
+print("GRACE")
+
+
+print("INITIALIZING MISC THINGS")
+
+game:GetService("RunService").RenderStepped:Connect(function()
+	-- GRACE
+	_plr.Character.Humanoid:SetAttribute("SprintSpeed",tonumber(graceSpeed.CurrentValue))
+	_plr.Character.Humanoid.JumpPower = tonumber(graceJP.CurrentValue)
+
+	-- FORSAKEN
+
+	if FORSAKEN_HITBOX.CurrentValue == true then
+		if workspace:FindFirstChild("Hitboxes") then
+			for i,v in pairs(workspace.Hitboxes:GetChildren()) do
+				if v.Name ~= _plr.Name.."Hitbox" then
+					local username = v.Name:match("^(.-)Hitbox")
+
+					if tostring(game.Players[username].Character.Parent) ~= tostring(_plr.Character.Parent) then
+						if (_plr.Character:GetPivot().Position - v.Position).Magnitude <= tonumber(FORSAKEN_DISTANCE.CurrentValue) then
+							game.ReplicatedStorage.Modules.Network.RemoteEvent:FireServer(
+								"UseActorAbility",
+								{buffer.fromstring("\003\005\000\000\000Block")}
+							)
+						end
+					end
+				end
+			end
+		end
+	end
+
+	-- UNIVERSAL
+
+	if tonumber(UNIVERSAL_WS.CurrentValue) ~= 16 then
+		_plr.Character.Humanoid.WalkSpeed = tonumber(UNIVERSAL_WS.CurrentValue)
+	end
+end)
+
+game.Players.ChildAdded:Connect(function()
+	tptoplr:Refresh(getAllPlayers())
+end)
